@@ -26,7 +26,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/hospital_management/css/hospital_management.css"
-# app_include_js = "/assets/hospital_management/js/hospital_management.js"
+# app_include_js = "custom_desk.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/hospital_management/css/hospital_management.css"
@@ -145,6 +145,11 @@ app_license = "mit"
 # 		"on_trash": "method"
 # 	}
 # }
+doc_events = {
+    "ToDo": {
+        "validate": "hospital_management.api.custom_logic"
+    }
+}
 
 # Scheduled Tasks
 # ---------------

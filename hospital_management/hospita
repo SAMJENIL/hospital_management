@@ -1,0 +1,4 @@
+import frappe
+@frappe.whitelist()
+def hello()
+return "Hello from hospital Management!"
