@@ -172,10 +172,16 @@ doc_events = {
 # 	],
 # }
 
+scheduler_events = {
+    "daily": [
+        "hospital_management.tasks.daily_maintenance"
+    ]
+}
 # Testing
 # -------
 
 # before_tests = "hospital_management.install.before_tests"
+
 
 # Extend DocType Class
 # ------------------------------
