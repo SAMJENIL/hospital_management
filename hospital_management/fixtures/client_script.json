@@ -1,0 +1,46 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Doctor",
+  "enabled": 1,
+  "modified": "2026-07-22 23:57:22.661769",
+  "module": null,
+  "name": "Doctor script",
+  "script": "frappe.ui.form.on(\"Doctor\", {\r\n    refresh(frm) {\r\n\r\n        frm.add_custom_button(\"Create Appointment\", function () {\r\n\r\n            frappe.new_doc(\"Hospital Appointment\", {\r\n                doctor: frm.doc.name\r\n            });\r\n\r\n        });\r\n\r\n    }\r\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "patient",
+  "enabled": 1,
+  "modified": "2026-07-24 17:28:57.613939",
+  "module": null,
+  "name": "Patient",
+  "script": "frappe.ui.form.on(\"Patient\", {\r\n    refresh(frm) {\r\n\r\n        frm.add_custom_button(\"Say Hello\", function() {\r\n\r\n            frappe.call({\r\n                method: \"hospital_management.api.hello\",\r\n                args: {\r\n                    name: frm.doc.patient_name\r\n                },\r\n                callback: function(r) {\r\n                    frappe.msgprint(r.message);\r\n                }\r\n            });\r\n\r\n        });\r\n\r\n    }\r\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Task",
+  "enabled": 1,
+  "modified": "2026-07-31 14:32:06.248126",
+  "module": null,
+  "name": "Task",
+  "script": "frappe.ui.form.on(\"Task\", {\r\n    refresh(frm) {\r\n        frm.add_custom_button(\"Create Task Using Dialog\", () => {\r\n\r\n            let d = new frappe.ui.Dialog({\r\n                title: \"Create New Task\",\r\n                fields: [\r\n                    {\r\n                        label: \"Task Subject\",\r\n                        fieldname: \"task_subject\",\r\n                        fieldtype: \"Data\",\r\n                        reqd: 1\r\n                    }\r\n                ],\r\n                primary_action_label: \"Create\",\r\n                primary_action(values) {\r\n\r\n                    frappe.call({\r\n                        method: \"hospital_management.api.create_task\",\r\n                        args: {\r\n                            task_subject: values.task_subject\r\n                        },\r\n                        callback: function(r) {\r\n\r\n                            frappe.msgprint(\r\n                                \"Task Created Successfully: \" + r.message\r\n                            );\r\n\r\n                            d.hide();\r\n                        }\r\n                    });\r\n\r\n                }\r\n            });\r\n\r\n            d.show();\r\n\r\n        });\r\n    }\r\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "User",
+  "enabled": 1,
+  "modified": "2026-09-11 15:53:08.353166",
+  "module": null,
+  "name": "Doctype Event",
+  "script": "frappe.ui.form.on('User', {\r\n    refresh(frm) {\r\n        frm.add_custom_button('Send Welcome Email', function() {\r\n            frappe.msgprint('Email Sent!');\r\n        }, 'Actions');\r\n    }\r\n});",
+  "view": "Form"
+ }
+]
